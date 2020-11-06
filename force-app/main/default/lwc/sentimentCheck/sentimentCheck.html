@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Sentiment Checker" icon-name="utility:emoji" variant="base">
+        <div slot="actions">
+            <a href="https://trailblazer.me/id/JFoxUK" target="_blank"><lightning-button-stateful variant="neutral" label-when-hover="Unfollow" label-when-off="Follow" label-when-on="Following" icon-name-when-hover="action:remove" icon-name-when-on="utility:check" icon-name-when-off="utility:add"></lightning-button-stateful></a>
+        </div>
+        <div slot="footer">
+            <lightning-button-group>
+                <lightning-button icon-position="left" variant="destructive" type="submit" label="Clear" onclick={clearValues} icon-name="utility:refresh"></lightning-button>
+                <lightning-button icon-position="left" variant="success" type="submit" label="Add to record" onclick={addToRecord} icon-name="utility:adduser"></lightning-button>
+            </lightning-button-group>
+        </div>
+        <div class="slds-card__body_inner">
+            <lightning-textarea label="Text to check" placeholder="Hello, thanks for you call today Jonathan, you got the job!" value={sentimentText} onchange={handleUserInput} variant="standard"></lightning-textarea>
+            <lightning-layout class="slds-wrap" multiple-rows="true">
+                <lightning-layout-item size="12">
+                    <lightning-button class="slds-container_center slds-align_absolute-center" icon-position="left" variant="brand" type="submit" label="Check sentiment" onclick={submitForCheck} icon-name="standard:actions_and_buttons"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={returnedResults}>
+                <lightning-layout class="slds-var-p-around_medium" multiple-rows="true">
+                    <lightning-layout-item size="12">
+                        <div class="slds-container_center slds-align_absolute-center">
+                            <h2>{sentimentResult}</h2>
+                        </div>
+                        <div class="slds-container_center slds-align_absolute-center">
+                            <lightning-progress-ring value="100" size="large" variant="active-step"></lightning-progress-ring><p class="slds-var-p-around_small">{positiveValue}</p>
+                        </div>
+                        <div class="slds-container_center slds-align_absolute-center">
+                            <lightning-progress-ring value="100" size="large" variant="warning"></lightning-progress-ring><p class="slds-var-p-around_small">{neutralValue}</p>
+                        </div>
+                        <div class="slds-container_center slds-align_absolute-center">
+                            <lightning-progress-ring value="100" size="large" variant="expired"></lightning-progress-ring><p class="slds-var-p-around_small">{negativeValue}</p>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div>
+    </lightning-card>
+</template>
